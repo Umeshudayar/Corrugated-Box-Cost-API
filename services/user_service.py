@@ -8,8 +8,8 @@
 
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from ..database import User
-from ..core.exceptions import UserAlreadyExistsError, UserNotFoundError
+from database import User
+from core.exceptions import UserAlreadyExistsError, UserNotFoundError
 
 class UserService:
     @staticmethod

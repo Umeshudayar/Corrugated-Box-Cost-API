@@ -7,8 +7,8 @@ Written by Rishi Shah <rishi@amarboxcompany.com>, 9/11/2025
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from .api.endpoints import users, calculations
-from .config import settings
+from api.endpoints import users, calculations
+from config import settings
 
 app = FastAPI(
     title="Corrugated Box Cost Calculator API",

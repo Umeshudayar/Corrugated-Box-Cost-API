@@ -9,10 +9,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
-from ...database import get_db
-from ...models.box_calculation import UserCreateRequest, UserResponse
-from ...services.user_service import UserService
-from ...core.exceptions import UserAlreadyExistsError, UserNotFoundError
+from database import get_db
+from models.box_calculation import UserCreateRequest, UserResponse
+from services.user_service import UserService
+from core.exceptions import UserAlreadyExistsError, UserNotFoundError
 
 router = APIRouter(prefix="/users", tags=["users"])
 

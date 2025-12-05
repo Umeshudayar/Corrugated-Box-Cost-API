@@ -8,7 +8,7 @@ Written by Rishi Shah <rishi@amarboxcompany.com>, 9/11/2025
 import math
 from enum import Enum
 from pint import UnitRegistry
-from ..models.box_calculation import PaperQuality as PydanticPaperQuality, BoxType as PydanticBoxType
+from models.box_calculation import PaperQuality as PydanticPaperQuality, BoxType as PydanticBoxType
 
 class PaperQuality(Enum):
     Kraft = 35.50

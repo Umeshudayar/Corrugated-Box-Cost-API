@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AmarBox - Login</title>
+<!-- Fonts and Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b2b2b",
+              "background-light": "#f7f7f7",
+              "background-dark": "#191919",
+              "terracotta": "#cd5c35",
+              "paper": "#fbfaf8",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#141414] antialiased overflow-x-hidden">
+<div class="flex min-h-screen w-full">
+<!-- Left Pane: Brand Imagery -->
+<div class="hidden lg:flex w-1/2 relative bg-[#2b2b2b] flex-col justify-between overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-80 mix-blend-overlay" data-alt="Abstract close-up of folded kraft paper and cardboard textures" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoqoM_jfAVgUCQQNq1mtUtEFoiXLKH1tjAi24zw3pBbOZRAfe1fyy8XjXfxIP_j5R_9S7jOOfXHRArIIGyF2I8IabA5YNYJ1i5Wj33X8aq0tljqF-0wUuFuMo2WqpTcpqvOI91OP1hRECJDh2LC8CCwJYA1AnZ5jBgFbcONDo6VmnKlMPLHYXSuT4JkTdaiX2-HilA5iSwrmfP_Sh7NDO6uf9aWrzzlRIL2CimkfD2SMokkt9ximmVL-d-SWjoYRQ5eeqzNnJUNck');">
+</div>
+<!-- Content Overlay -->
+<div class="relative z-10 p-12 h-full flex flex-col justify-between">
+<div class="flex items-center gap-3 text-white">
+<div class="size-8">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+</div>
+<div class="max-w-md">
+<h2 class="text-4xl font-bold text-white mb-4 leading-tight">Craft Your Packaging Journey</h2>
+<p class="text-lg text-white/80 font-normal">Join thousands of designers creating industrial solutions with a handcrafted touch.</p>
+</div>
+<div class="flex gap-2">
+<div class="h-1.5 w-8 rounded-full bg-white"></div>
+<div class="h-1.5 w-2 rounded-full bg-white/30"></div>
+<div class="h-1.5 w-2 rounded-full bg-white/30"></div>
+</div>
+</div>
+</div>
+<!-- Right Pane: Login Form -->
+<div class="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 sm:p-12 xl:p-24 bg-white dark:bg-background-dark relative">
+<!-- Mobile Logo (visible only on small screens) -->
+<div class="lg:hidden absolute top-8 left-8 flex items-center gap-2 text-primary dark:text-white">
+<div class="size-6">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="font-bold text-lg">AmarBox</span>
+</div>
+<div class="w-full max-w-sm flex flex-col gap-8">
+<!-- Heading Group -->
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-bold tracking-tight text-primary dark:text-white">Welcome back</h1>
+<p class="text-[#757575] text-base font-normal">Sign in to manage your quotes and designs.</p>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-5">
+<!-- Email Input -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-primary dark:text-white" for="email">Email Address</label>
+<div class="relative group">
+<input class="peer block w-full rounded-lg border-2 border-[#e5e5e5] bg-paper dark:bg-[#262626] dark:border-[#404040] dark:text-white px-4 py-3 text-base text-primary placeholder-[#a3a3a3] focus:border-primary dark:focus:border-white focus:ring-0 transition-all outline-none" id="email" placeholder="designer@studio.com" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-semibold text-primary dark:text-white" for="password">Password</label>
+<a class="text-sm font-medium text-terracotta hover:text-terracotta/80" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<input class="peer block w-full rounded-lg border-2 border-[#e5e5e5] bg-paper dark:bg-[#262626] dark:border-[#404040] dark:text-white px-4 py-3 text-base text-primary placeholder-[#a3a3a3] focus:border-primary dark:focus:border-white focus:ring-0 transition-all outline-none" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-[#757575] hover:text-primary dark:hover:text-white" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Login Button -->
+<button class="mt-2 w-full rounded-lg bg-primary py-3.5 px-4 text-center text-sm font-bold text-white shadow-md hover:bg-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all" type="button">
+                        Log In
+                    </button>
+</form>
+<!-- Divider & Social -->
+<div class="flex flex-col gap-6">
+<div class="relative flex items-center gap-4 py-2">
+<div class="h-px flex-1 bg-[#e5e5e5] dark:bg-[#404040]"></div>
+<span class="text-xs font-medium text-[#757575] uppercase tracking-wider">Or continue with</span>
+<div class="h-px flex-1 bg-[#e5e5e5] dark:bg-[#404040]"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 rounded-lg border border-[#e5e5e5] dark:border-[#404040] bg-white dark:bg-[#262626] py-2.5 px-4 text-sm font-medium text-primary dark:text-white hover:bg-[#f7f7f7] dark:hover:bg-[#333] transition-colors">
+<img alt="Google" class="size-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgOLWctFijAleYloqsYKpDBtiURo3PQj70JEEhBPhp364Jj2pq8xisAo6A4azmugAjfYkzhoEfBf2sYM5i9SB8icaOZxTDWagAyzjqg4-Wrr20g9hzdgIgsXIgQxTUnI64oaaPVKW0MT4MQItXX1qtAEgDGoczkQUo2EMXkT-7j77kaRI7aKtFLPi7sHtng36qAXg-vZY9lGDkZCsTVYEFrhIs6U-XA8zlDVbekFZQZHLOKICtbqXDd9xiChkrhFEVrWawNMLG2jg"/>
+<span>Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-lg border border-[#e5e5e5] dark:border-[#404040] bg-white dark:bg-[#262626] py-2.5 px-4 text-sm font-medium text-primary dark:text-white hover:bg-[#f7f7f7] dark:hover:bg-[#333] transition-colors">
+<span class="material-symbols-outlined text-[22px]">ios</span>
+<span>Apple</span>
+</button>
+</div>
+</div>
+<!-- Footer Sign Up -->
+<div class="text-center">
+<p class="text-sm text-[#757575]">
+                        New to AmarBox? 
+                        <a class="font-bold text-primary dark:text-white hover:underline" href="#">Start a Quote</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body></html>

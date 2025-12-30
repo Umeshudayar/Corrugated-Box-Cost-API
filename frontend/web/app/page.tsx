@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Footer from "@/components/Footer";
 import Link from "next/link";
+
 
 export default function HomePage() {
   return (
@@ -106,11 +108,12 @@ export default function HomePage() {
           <section className="py-20 bg-white dark:bg-[#1f1f1f]">
             <div className="max-w-[1440px] mx-auto px-4">
               <h2 className="text-4xl font-black mb-12">HOW IT WORKS</h2>
+              <h3 className="text-lg opacity-70 mb-8">We've simplified the industrial process. From digital file to physical product in three streamlined steps</h3>
 
               <div className="grid md:grid-cols-3 gap-8">
                 {[
-                  ["01", "Design & Upload"],
-                  ["02", "Instant Quote"],
+                  ["01", "Upload Your Artwork and Get Quotes"],
+                  ["02", "Create a Custom Instant Quote"],
                   ["03", "Production & Ship"],
                 ].map(([num, title]) => (
                   <div key={num} className="p-8 border rounded-lg">
@@ -140,7 +143,7 @@ export default function HomePage() {
                   <div key={title}>
                     <div className="aspect-square rounded-lg overflow-hidden">
                       <Image
-                        src={`/images/${img}`}
+                        src={`/public/${img}`}
                         alt={title}
                         fill
                         className="object-cover"
@@ -177,6 +180,8 @@ export default function HomePage() {
         <footer className="bg-black text-white py-16 text-center text-sm opacity-70">
           © 2024 AmarBox. All rights reserved.
         </footer>
+<Footer />
+
 
       </div>
     </>

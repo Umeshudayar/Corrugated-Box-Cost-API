@@ -1,19 +1,18 @@
 import Image from "next/image";
-import Footer from "@/components/Footer";
 import Link from "next/link";
-
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
     <>
       {/* Texture Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-50 bg-noise opacity-40 mix-blend-multiply dark:mix-blend-overlay" />
+      <div className="fixed inset-0 pointer-events-none z-10 bg-noise opacity-40 mix-blend-multiply dark:mix-blend-overlay" />
 
-      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark font-display text-primary dark:text-white">
+      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark text-primary dark:text-white">
 
         {/* ================= NAVBAR ================= */}
         <header className="sticky top-0 z-40 w-full bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm border-b border-primary/10 dark:border-white/10">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-[1440px] mx-auto px-6">
             <div className="flex h-16 items-center justify-between">
 
               {/* Logo */}
@@ -25,27 +24,25 @@ export default function HomePage() {
                   height={32}
                   className="rounded-full"
                 />
-                <h2 className="text-xl font-black tracking-tight uppercase">
-                  AmarBox
-                </h2>
+                <span className="text-xl font-black uppercase">AmarBox</span>
               </div>
 
               {/* Nav */}
-              <nav className="hidden md:flex items-center gap-8">
-                <Link href="/" className="nav-link">Materials</Link>
-                <Link href="#" className="nav-link">Shapes</Link>
-                <Link href="#" className="nav-link">Gallery</Link>
-                <Link href="/product/box-1" className="nav-link">Services</Link>
+              <nav className="hidden md:flex gap-8 text-sm font-semibold uppercase tracking-wide">
+                <Link href="#">Materials</Link>
+                <Link href="#">Shapes</Link>
+                <Link href="#">Gallery</Link>
+                <Link href="/product/box-1">Services</Link>
               </nav>
 
               {/* Actions */}
               <div className="flex items-center gap-4">
-                <Link href="/auth/login" className="text-sm font-bold uppercase tracking-wider hover:underline">
+                <Link href="/auth/login" className="text-sm font-bold uppercase hover:underline">
                   Log In
                 </Link>
                 <Link
                   href="/calculator"
-                  className="border border-primary px-4 py-2 text-sm font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition"
+                  className="border px-4 py-2 text-sm font-bold uppercase hover:bg-primary hover:text-white transition"
                 >
                   Get Quote
                 </Link>
@@ -59,15 +56,15 @@ export default function HomePage() {
 
           {/* ================= HERO ================= */}
           <section className="border-b border-primary/10 dark:border-white/10">
-            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-12 gap-12 items-center">
+            <div className="max-w-[1440px] mx-auto px-6 py-20 grid lg:grid-cols-12 gap-12 items-center">
 
               {/* Text */}
               <div className="lg:col-span-5 space-y-8">
-                <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase tracking-widest border rounded-full">
+                <span className="inline-block px-4 py-1 text-xs font-mono uppercase tracking-widest border rounded-full">
                   Industrial Craft v2.0
                 </span>
 
-                <h1 className="text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight">
+                <h1 className="text-5xl lg:text-7xl font-black leading-[0.95]">
                   PACKAGING THAT SPEAKS <br />
                   <span className="opacity-40">YOUR BRAND.</span>
                 </h1>
@@ -79,44 +76,48 @@ export default function HomePage() {
                 <div className="flex gap-4">
                   <Link
                     href="/calculator"
-                    className="bg-primary text-white px-8 py-4 font-bold uppercase tracking-wider hover:opacity-90"
+                    className="bg-primary text-white px-8 py-4 font-bold uppercase hover:opacity-90 transition"
                   >
                     Start Your Design →
                   </Link>
-                  <button className="border px-8 py-4 font-bold uppercase tracking-wider">
+                  <button className="border px-8 py-4 font-bold uppercase">
                     View Samples
                   </button>
                 </div>
               </div>
 
-              {/* Image */}
+              {/* Hero Image */}
               <div className="lg:col-span-7">
-                <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+                <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl cursor-pointer group">
                   <Image
                     src="/images/hero-boxes.png"
                     alt="Kraft boxes"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
               </div>
-
             </div>
           </section>
 
           {/* ================= HOW IT WORKS ================= */}
           <section className="py-20 bg-white dark:bg-[#1f1f1f]">
-            <div className="max-w-[1440px] mx-auto px-4">
-              <h2 className="text-4xl font-black mb-12">HOW IT WORKS</h2>
-              <h3 className="text-lg opacity-70 mb-8">We've simplified the industrial process. From digital file to physical product in three streamlined steps</h3>
+            <div className="max-w-[1440px] mx-auto px-6">
+              <h2 className="text-4xl font-black mb-6">HOW IT WORKS</h2>
+              <p className="opacity-70 mb-12 max-w-2xl">
+                We've simplified the industrial process. From digital file to physical product in three streamlined steps.
+              </p>
 
               <div className="grid md:grid-cols-3 gap-8">
                 {[
-                  ["01", "Upload Your Artwork and Get Quotes"],
-                  ["02", "Create a Custom Instant Quote"],
+                  ["01", "Upload Artwork"],
+                  ["02", "Instant Quote"],
                   ["03", "Production & Ship"],
                 ].map(([num, title]) => (
-                  <div key={num} className="p-8 border rounded-lg">
+                  <div
+                    key={num}
+                    className="p-8 border rounded-lg hover:border-primary transition cursor-pointer"
+                  >
                     <span className="text-6xl opacity-10 font-black">{num}</span>
                     <h3 className="text-xl font-bold mt-4">{title}</h3>
                   </div>
@@ -127,7 +128,7 @@ export default function HomePage() {
 
           {/* ================= MATERIAL SHOWCASE ================= */}
           <section className="py-20">
-            <div className="max-w-[1440px] mx-auto px-4">
+            <div className="max-w-[1440px] mx-auto px-6">
               <h2 className="text-4xl font-black text-center mb-12">
                 MATERIAL SHOWCASE
               </h2>
@@ -140,16 +141,18 @@ export default function HomePage() {
                   ["sleeve.png", "Product Sleeves"],
                   ["insert.png", "Custom Inserts"],
                 ].map(([img, title]) => (
-                  <div key={title}>
-                    <div className="aspect-square rounded-lg overflow-hidden">
+                  <div key={title} className="cursor-pointer group">
+                    <div className="relative aspect-square rounded-lg overflow-hidden">
                       <Image
-                        src={`/public/${img}`}
+                        src={`/${img}`}
                         alt={title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
-                    <h3 className="mt-3 font-bold">{title}</h3>
+                    <h3 className="mt-3 font-bold group-hover:opacity-70 transition">
+                      {title}
+                    </h3>
                   </div>
                 ))}
               </div>
@@ -158,9 +161,7 @@ export default function HomePage() {
 
           {/* ================= CTA ================= */}
           <section className="py-24 bg-primary text-white text-center">
-            <h2 className="text-4xl font-black mb-6">
-              READY TO MAKE IT REAL?
-            </h2>
+            <h2 className="text-4xl font-black mb-6">READY TO MAKE IT REAL?</h2>
             <p className="opacity-80 mb-10">
               Join thousands of brands packaging with AmarBox.
             </p>
@@ -177,11 +178,7 @@ export default function HomePage() {
         </main>
 
         {/* ================= FOOTER ================= */}
-        <footer className="bg-black text-white py-16 text-center text-sm opacity-70">
-          © 2024 AmarBox. All rights reserved.
-        </footer>
-<Footer />
-
+        <Footer />
 
       </div>
     </>

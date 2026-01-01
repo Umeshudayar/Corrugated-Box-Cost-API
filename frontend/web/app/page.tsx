@@ -37,8 +37,8 @@ export default function HomePage() {
 
               {/* Actions */}
               <div className="flex items-center gap-4">
-                <Link href="/auth/login" className="text-sm font-bold uppercase hover:underline">
-                  Log In
+                <Link href="/auth" className="border px-4 py-2 text-sm font-bold uppercase hover:bg-primary hover:text-white transition">
+                LogIN / SignIn
                 </Link>
                 <Link
                   href="/calculator"

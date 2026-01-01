@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AmarBox - Box Cost Calculator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white min-h-screen flex flex-col">
+<!-- Navbar -->
+<header class="sticky top-0 z-50 bg-white dark:bg-[#1a2634] border-b border-[#f0f2f4] dark:border-[#2a3644] px-4 lg:px-10 py-3 shadow-sm">
+<div class="flex items-center justify-between max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary flex items-center justify-center rounded-lg bg-primary/10">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<h2 class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">AmarBox</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex h-9 items-center justify-center rounded-lg px-4 bg-white dark:bg-[#2a3644] border border-[#dbe0e6] dark:border-[#3a4654] text-[#111418] dark:text-white text-sm font-medium hover:bg-gray-50 dark:hover:bg-[#3a4654] transition-colors">
+<span class="material-symbols-outlined mr-2 text-[18px]">save</span>
+                    Save Quote
+                </button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 ring-2 ring-gray-100 dark:ring-gray-700" data-alt="User profile avatar placeholder with abstract gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDpHUn6RFIlRPPE3DCAv92wTK487_YfiZ0IntaTJBuzY4ummyWRnTIBSGs8Hm_tFl_UcIkY56_zVG7nZJ8Ol8v48IDNqrSTqn61G3CSjrhUrgG5k3_YRg4ZcIec4P7eLAqwkHHqG-LY2bwf-gErltY7K4Z8d4qrw_1vjgy_o7xpDVncJ0EiQJ1hohPKyh14VujVH1l-MDufE7wfLuEHuD2aXCzlpU6l-rM9JUxh-ZCTjBE4Hsq4pA1Wj5MIkXDDIm6MN-xNSVZ6Dbs");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 lg:px-8 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Inputs -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Progress Stepper -->
+<div class="bg-white dark:bg-[#1a2634] p-4 rounded-xl shadow-sm border border-[#f0f2f4] dark:border-[#2a3644]">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-0 top-1/2 w-full h-1 bg-[#e5e7eb] dark:bg-[#374151] -z-10 rounded-full"></div>
+<div class="absolute left-0 top-1/2 w-[20%] h-1 bg-primary -z-10 rounded-full"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold shadow-md shadow-primary/20">1</div>
+<span class="text-xs font-semibold text-primary hidden sm:block">Input</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white dark:bg-[#2a3644] border-2 border-primary text-primary flex items-center justify-center text-sm font-bold">2</div>
+<span class="text-xs font-medium text-[#617589] hidden sm:block">Dims</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white dark:bg-[#2a3644] border-2 border-[#e5e7eb] dark:border-[#374151] text-[#617589] flex items-center justify-center text-sm font-bold">3</div>
+<span class="text-xs font-medium text-[#617589] hidden sm:block">Props</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white dark:bg-[#2a3644] border-2 border-[#e5e7eb] dark:border-[#374151] text-[#617589] flex items-center justify-center text-sm font-bold">4</div>
+<span class="text-xs font-medium text-[#617589] hidden sm:block">Prod</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white dark:bg-[#2a3644] border-2 border-[#e5e7eb] dark:border-[#374151] text-[#617589] flex items-center justify-center text-sm font-bold">5</div>
+<span class="text-xs font-medium text-[#617589] hidden sm:block">Mfg</span>
+</div>
+</div>
+</div>
+<!-- Step 1: Input Type -->
+<section class="bg-white dark:bg-[#1a2634] rounded-xl shadow-sm border border-[#f0f2f4] dark:border-[#2a3644] overflow-hidden">
+<div class="px-6 py-4 border-b border-[#f0f2f4] dark:border-[#2a3644] flex justify-between items-center">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">looks_one</span>
+                            Input Method
+                        </h3>
+<span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-1 rounded-full">Completed</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Option 1: Box Dims -->
+<div class="relative group cursor-pointer border-2 border-primary bg-primary/5 dark:bg-primary/10 rounded-lg p-4 transition-all hover:shadow-md">
+<div class="absolute top-3 right-3 text-primary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="w-full h-32 bg-[#e0e7ff] dark:bg-[#1e293b] rounded-md mb-2 flex items-center justify-center" data-alt="Illustration of a 3D cardboard box showing dimensions">
+<span class="material-symbols-outlined text-6xl text-primary/40">deployed_code</span>
+</div>
+<div>
+<h4 class="font-bold text-[#111418] dark:text-white text-lg">Box Dimensions</h4>
+<p class="text-sm text-[#617589] dark:text-gray-400 mt-1">Calculate cost based on the finished box size (Length x Width x Height).</p>
+</div>
+<div class="mt-2">
+<span class="text-xs font-bold text-primary bg-white dark:bg-[#2a3644] px-2 py-1 rounded border border-primary/20">Default</span>
+</div>
+</div>
+</div>
+<!-- Option 2: Sheet Size -->
+<div class="relative opacity-60 cursor-not-allowed border border-[#e5e7eb] dark:border-[#374151] bg-gray-50 dark:bg-[#131b24] rounded-lg p-4">
+<div class="flex flex-col gap-3">
+<div class="w-full h-32 bg-gray-200 dark:bg-[#2a3644] rounded-md mb-2 flex items-center justify-center" data-alt="Illustration of a flat cardboard sheet">
+<span class="material-symbols-outlined text-6xl text-gray-400">branding_watermark</span>
+</div>
+<div>
+<h4 class="font-bold text-[#617589] dark:text-gray-400 text-lg">Sheet Size</h4>
+<p class="text-sm text-[#617589] dark:text-gray-500 mt-1">Calculate cost based on raw corrugated sheet dimensions.</p>
+</div>
+<div class="mt-2">
+<span class="text-xs font-bold text-gray-500 bg-gray-200 dark:bg-[#2a3644] px-2 py-1 rounded">Disabled</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2: Dimensions -->
+<section class="bg-white dark:bg-[#1a2634] rounded-xl shadow-sm border border-[#f0f2f4] dark:border-[#2a3644] overflow-hidden">
+<div class="px-6 py-4 border-b border-[#f0f2f4] dark:border-[#2a3644]">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">looks_two</span>
+                            Box Dimensions
+                        </h3>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+<div class="sm:col-span-2 lg:col-span-1">
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Length</label>
+<div class="relative">
+<input class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="0" type="number"/>
+</div>
+</div>
+<div class="sm:col-span-2 lg:col-span-1">
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Width</label>
+<div class="relative">
+<input class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="0" type="number"/>
+</div>
+</div>
+<div class="sm:col-span-2 lg:col-span-1">
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Height</label>
+<div class="relative">
+<input class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="0" type="number"/>
+</div>
+</div>
+<div class="sm:col-span-3 lg:col-span-1">
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Units</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>mm</option>
+<option>inch</option>
+<option>cm</option>
+</select>
+</div>
+<div class="sm:col-span-3 lg:col-span-1">
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Type</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>RSC</option>
+<option>Die Cut</option>
+<option>Custom</option>
+</select>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-sm text-[#617589] dark:text-gray-400 bg-gray-50 dark:bg-[#131b24] p-3 rounded-lg border border-[#f0f2f4] dark:border-[#374151]">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span>Standard Regular Slotted Container (RSC) dimensions are internal.</span>
+</div>
+</div>
+</section>
+<!-- Step 3: Box Properties -->
+<section class="bg-white dark:bg-[#1a2634] rounded-xl shadow-sm border border-[#f0f2f4] dark:border-[#2a3644] overflow-hidden">
+<div class="px-6 py-4 border-b border-[#f0f2f4] dark:border-[#2a3644]">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">looks_3</span>
+                            Box Properties
+                        </h3>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<!-- Header Row -->
+<div class="hidden md:grid grid-cols-12 gap-4 text-sm font-semibold text-[#617589] dark:text-gray-400 pb-2 border-b border-[#f0f2f4] dark:border-[#374151]">
+<div class="col-span-3">Layer</div>
+<div class="col-span-5">Paper Quality</div>
+<div class="col-span-4">Paper Weight (GSM)</div>
+</div>
+<!-- Row 1: Top -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+<div class="col-span-12 md:col-span-3 flex items-center gap-2">
+<div class="size-8 rounded bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">vertical_align_top</span>
+</div>
+<span class="font-medium text-[#111418] dark:text-white">Top Layer</span>
+</div>
+<div class="col-span-12 md:col-span-5">
+<label class="md:hidden text-sm text-gray-500 mb-1 block">Paper Quality</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>Kraft (Virgin)</option>
+<option>Semi-Kraft</option>
+<option>Recycled</option>
+</select>
+</div>
+<div class="col-span-12 md:col-span-4">
+<label class="md:hidden text-sm text-gray-500 mb-1 block">Weight</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>180 GSM</option>
+<option>200 GSM</option>
+<option>230 GSM</option>
+</select>
+</div>
+</div>
+<!-- Row 2: Flute -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+<div class="col-span-12 md:col-span-3 flex items-center gap-2">
+<div class="size-8 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">waves</span>
+</div>
+<span class="font-medium text-[#111418] dark:text-white">Flute Layer</span>
+</div>
+<div class="col-span-12 md:col-span-5">
+<label class="md:hidden text-sm text-gray-500 mb-1 block">Paper Quality</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>Semi-Kraft</option>
+<option>Kraft (Virgin)</option>
+<option>Recycled</option>
+</select>
+</div>
+<div class="col-span-12 md:col-span-4">
+<label class="md:hidden text-sm text-gray-500 mb-1 block">Weight</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>120 GSM</option>
+<option>140 GSM</option>
+<option>160 GSM</option>
+</select>
+</div>
+</div>
+<!-- Row 3: Bottom -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+<div class="col-span-12 md:col-span-3 flex items-center gap-2">
+<div class="size-8 rounded bg-green-100 dark:bg-green-900/30 text-green-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">vertical_align_bottom</span>
+</div>
+<span class="font-medium text-[#111418] dark:text-white">Bottom Layer</span>
+</div>
+<div class="col-span-12 md:col-span-5">
+<label class="md:hidden text-sm text-gray-500 mb-1 block">Paper Quality</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>Recycled</option>
+<option>Semi-Kraft</option>
+<option>Kraft (Virgin)</option>
+</select>
+</div>
+<div class="col-span-12 md:col-span-4">
+<label class="md:hidden text-sm text-gray-500 mb-1 block">Weight</label>
+<select class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary">
+<option>140 GSM</option>
+<option>160 GSM</option>
+<option>180 GSM</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 4: Production Details -->
+<section class="bg-white dark:bg-[#1a2634] rounded-xl shadow-sm border border-[#f0f2f4] dark:border-[#2a3644] overflow-hidden">
+<div class="px-6 py-4 border-b border-[#f0f2f4] dark:border-[#2a3644]">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">looks_4</span>
+                            Production Details
+                        </h3>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Ply Number</label>
+<input class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" min="3" placeholder="3" step="2" type="number"/>
+<span class="text-xs text-red-500 mt-1 hidden">Odd numbers only</span>
+<span class="text-xs text-[#617589] dark:text-gray-400 mt-1 block">Odd numbers only (3, 5, 7...)</span>
+</div>
+<div>
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Boxes per Sheet</label>
+<input class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="1" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Total Quantity</label>
+<input class="w-full rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#131b24] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="1000" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-3">Box Attachment Method</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="cursor-pointer border border-[#dbe0e6] dark:border-[#374151] rounded-lg p-3 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-[#2a3644] transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" name="attachment" type="radio"/>
+<span class="text-sm font-medium dark:text-gray-200">None / Tape</span>
+</label>
+<label class="cursor-pointer border border-primary bg-primary/5 dark:bg-primary/10 rounded-lg p-3 flex items-center gap-3 transition-colors">
+<input checked="" class="text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" name="attachment" type="radio"/>
+<span class="text-sm font-medium dark:text-gray-200">Pinning</span>
+</label>
+<label class="cursor-pointer border border-[#dbe0e6] dark:border-[#374151] rounded-lg p-3 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-[#2a3644] transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" name="attachment" type="radio"/>
+<span class="text-sm font-medium dark:text-gray-200">Hand Pasting</span>
+</label>
+</div>
+<!-- Conditional Input -->
+<div class="mt-4 p-4 bg-gray-50 dark:bg-[#131b24] rounded-lg border border-[#f0f2f4] dark:border-[#2a3644] flex items-center gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+<div class="flex-1">
+<label class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-1.5">Number of Pins per Box</label>
+<input class="w-full max-w-[200px] rounded-lg border-[#dbe0e6] dark:border-[#374151] bg-white dark:bg-[#1a2634] text-[#111418] dark:text-white h-10 px-3 focus:ring-2 focus:ring-primary/50 focus:border-primary" type="number" value="2"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 5: Manufacturing Options -->
+<section class="bg-white dark:bg-[#1a2634] rounded-xl shadow-sm border border-[#f0f2f4] dark:border-[#2a3644] overflow-hidden mb-8">
+<div class="px-6 py-4 border-b border-[#f0f2f4] dark:border-[#2a3644]">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">looks_5</span>
+                            Manufacturing Options
+                        </h3>
+</div>
+<div class="p-6 space-y-6">
+<div>
+<span class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-3">Flute Type</span>
+<div class="flex gap-6">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" name="fluteType" type="radio"/>
+<span class="text-sm dark:text-gray-200 group-hover:text-primary transition-colors">Narrow Flute (NF)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" name="fluteType" type="radio"/>
+<span class="text-sm dark:text-gray-200 group-hover:text-primary transition-colors">Broad Flute (EF)</span>
+</label>
+</div>
+<!-- Conditional Options for NF (Scoring) -->
+<div class="mt-3 ml-6">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" type="checkbox"/>
+<span class="text-sm text-[#617589] dark:text-gray-400">Include Scoring (Rotary)</span>
+</label>
+</div>
+</div>
+<hr class="border-[#f0f2f4] dark:border-[#2a3644]"/>
+<div>
+<span class="block text-sm font-medium text-[#111418] dark:text-gray-200 mb-3">Add-ons</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<label class="flex items-start gap-3 p-3 border border-[#dbe0e6] dark:border-[#374151] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-[#2a3644] transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="mt-1 rounded text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" type="checkbox"/>
+<div>
+<span class="block text-sm font-medium dark:text-white">Lamination</span>
+<span class="text-xs text-[#617589] dark:text-gray-400">Protective plastic coating</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 border border-[#dbe0e6] dark:border-[#374151] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-[#2a3644] transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="mt-1 rounded text-primary focus:ring-primary bg-white dark:bg-[#1a2634] border-gray-300 dark:border-gray-600" type="checkbox"/>
+<div>
+<span class="block text-sm font-medium dark:text-white">Flexo Printing</span>
+<span class="text-xs text-[#617589] dark:text-gray-400">Basic 1-2 color printing</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Estimate Panel (Sticky) -->
+<div class="lg:col-span-4 sticky top-24">
+<div class="bg-white dark:bg-[#1a2634] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-[#f0f2f4] dark:border-[#2a3644] overflow-hidden">
+<div class="bg-[#111418] dark:bg-[#0f161e] p-5 text-white">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calculate</span>
+                            Estimate Summary
+                        </h3>
+<p class="text-xs text-gray-400 mt-1">Real-time cost estimation based on inputs.</p>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<!-- Cost Breakdown -->
+<div class="space-y-3">
+<div class="flex justify-between items-center pb-3 border-b border-dashed border-[#dbe0e6] dark:border-[#374151]">
+<span class="text-sm text-[#617589] dark:text-gray-400">Material Cost</span>
+<span class="text-sm font-medium font-mono text-[#111418] dark:text-white">$840.25</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-dashed border-[#dbe0e6] dark:border-[#374151]">
+<span class="text-sm text-[#617589] dark:text-gray-400">Manufacturing</span>
+<span class="text-sm font-medium font-mono text-[#111418] dark:text-white">$215.00</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-dashed border-[#dbe0e6] dark:border-[#374151]">
+<span class="text-sm text-[#617589] dark:text-gray-400">Add-ons (Pins)</span>
+<span class="text-sm font-medium font-mono text-[#111418] dark:text-white">$15.50</span>
+</div>
+</div>
+<!-- Total -->
+<div class="bg-primary/5 dark:bg-primary/10 rounded-lg p-4 mt-2 border border-primary/10">
+<span class="block text-xs uppercase tracking-wider font-semibold text-[#617589] dark:text-gray-400 mb-1">Total Estimated Price</span>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold text-primary tracking-tight font-display">$1,070.75</span>
+<span class="text-sm text-[#617589] dark:text-gray-400">USD</span>
+</div>
+<div class="mt-2 text-xs text-[#617589] dark:text-gray-500">
+                                Approx. <span class="font-semibold text-primary">$1.07</span> per box
+                            </div>
+</div>
+<!-- CTA -->
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-blue-500/30 transition-all active:scale-[0.98]">
+                            Calculate My Estimate
+                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<div class="text-center">
+<button class="text-xs text-[#617589] dark:text-gray-500 hover:text-primary underline">Reset all fields</button>
+</div>
+</div>
+</div>
+<!-- Helper Card -->
+<div class="mt-4 bg-blue-50 dark:bg-blue-900/10 rounded-lg p-4 border border-blue-100 dark:border-blue-800/30 flex gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">help</span>
+<div class="text-sm text-blue-900 dark:text-blue-100">
+<p class="font-semibold mb-1">Need custom die-lines?</p>
+<p class="opacity-80">Contact our design team for custom structural engineering support.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

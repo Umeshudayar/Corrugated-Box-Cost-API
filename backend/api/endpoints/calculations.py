@@ -8,11 +8,11 @@ Written by Rishi Shah <rishi@amarboxcompany.com>, 9/11/2025
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from backend.database import get_db
-from backend.models.box_calculation import BoxCalculationRequest, BoxCalculationResponse
-from backend.services.box_calculator import BoxCalculatorService
-from backend.services.user_service import UserService
-from backend.core.exceptions import UserNotFoundError, InvalidConfigurationError
+from database import get_db
+from models.box_calculation import BoxCalculationRequest, BoxCalculationResponse
+from services.box_calculator import BoxCalculatorService
+from services.user_service import UserService
+from core.exceptions import UserNotFoundError, InvalidConfigurationError
 
 router = APIRouter(prefix="/calculate", tags=["calculations"])
 
@@ -29,6 +29,18 @@ async def calculate_box_cost(
         # Perform calculation
         calculator = BoxCalculatorService()
         result = calculator.calculate_cost(calculation_request.dict(), user.tier)
+        
+        # Save Quote to database
+        from database import Quote
+        new_quote = Quote(
+            user_id=user.user_id,
+            box_type=calculation_request.box_type,
+            dimensions=calculation_request.box_dimensions.dict(),
+            total_cost=result['total_order_cost']
+        )
+        db.add(new_quote)
+        db.commit()
+        db.refresh(new_quote)
         
         return BoxCalculationResponse(**result)
         

@@ -11,6 +11,8 @@ from typing import Optional
 class Settings(BaseSettings):
     database_url: str = "sqlite:///./corrugated_box.db"
     secret_key: str = "dev-secret-key-change-in-production"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 60 * 24 * 7  # 1 week
     debug: bool = True
     
     class Config:

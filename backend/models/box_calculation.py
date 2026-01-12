@@ -73,20 +73,26 @@ class BoxCalculationResponse(BaseModel):
     user_id: str
     user_tier: int
     input_mode: str
-    box_dimensions: dict
-    sheet_size: dict
-    sheet_area: float
+    box_dimensions: Optional[dict] = None
+    sheet_size: Optional[dict] = None
+    sheet_area: Optional[float] = None
     sheet_weight: dict
-    cost_breakdown: dict
+    cost_breakdown: Optional[dict] = None
+    manufacturing_cost: float
     cost_per_box: float
     total_order_cost: float
     suggested_prices: Optional[List[dict]] = None
 
 class UserCreateRequest(BaseModel):
-    user_id: str = Field(..., description="Unique business user ID")
+    user_id: Optional[str] = Field(None, description="Unique business user ID")
     name: str
     email: str
+    password: str
     tier: int = Field(default=0, ge=0, le=4)
+
+class UserLoginRequest(BaseModel):
+    email: str
+    password: str
 
 class UserResponse(BaseModel):
     user_id: str
@@ -94,3 +100,8 @@ class UserResponse(BaseModel):
     email: str
     tier: int
     created_at: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserResponse

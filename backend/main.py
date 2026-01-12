@@ -7,8 +7,8 @@ Written by Rishi Shah <rishi@amarboxcompany.com>, 9/11/2025
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from backend.api.endpoints import users, calculations
-from backend.config import settings
+from api.endpoints import users, calculations
+from config import settings
 
 app = FastAPI(
     title="Corrugated Box Cost Calculator API",
@@ -20,7 +20,10 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

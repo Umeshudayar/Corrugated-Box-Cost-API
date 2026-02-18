@@ -7,7 +7,7 @@ Written by Rishi Shah <rishi@amarboxcompany.com>, 9/11/2025
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from api.endpoints import users, calculations
+from api.endpoints import users, calculations, payments
 from config import settings
 
 app = FastAPI(
@@ -23,6 +23,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -32,6 +34,7 @@ app.add_middleware(
 # Include routers
 app.include_router(users.router, prefix="/api/v1")
 app.include_router(calculations.router, prefix="/api/v1")
+app.include_router(payments.router, prefix="/api/v1")
 
 @app.get("/")
 async def root():

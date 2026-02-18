@@ -15,6 +15,11 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 60 * 24 * 7  # 1 week
     debug: bool = True
     
+    # Razorpay Configuration
+    razorpay_key_id: str = ""
+    razorpay_key_secret: str = ""
+    razorpay_webhook_secret: Optional[str] = None
+    
     class Config:
         env_file = ".env"
 

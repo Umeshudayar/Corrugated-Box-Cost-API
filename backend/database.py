@@ -54,6 +54,25 @@ class Order(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     user = relationship("User", back_populates="orders")
+    payments = relationship("Payment", back_populates="order")
+
+class Payment(Base):
+    __tablename__ = "payments"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, ForeignKey("orders.id"))
+    user_id = Column(String, ForeignKey("users.user_id"))
+    razorpay_order_id = Column(String, unique=True, index=True)
+    razorpay_payment_id = Column(String, unique=True, index=True, nullable=True)
+    razorpay_signature = Column(String, nullable=True)
+    amount = Column(Float)  # Amount in INR
+    currency = Column(String, default="INR")
+    status = Column(String, default="created")  # created, authorized, captured, failed, refunded
+    payment_method = Column(String, nullable=True)  # card, netbanking, wallet, upi
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    order = relationship("Order", back_populates="payments")
 
 # Create tables
 Base.metadata.create_all(bind=engine)

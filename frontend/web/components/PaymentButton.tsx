@@ -1,41 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
-// Declare Razorpay on window
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
-
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  order_id: string;
-  handler: (response: RazorpayResponse) => void;
-  prefill?: {
-    name?: string;
-    email?: string;
-    contact?: string;
-  };
-  notes?: Record<string, any>;
-  theme?: {
-    color?: string;
-  };
-  modal?: {
-    ondismiss?: () => void;
-  };
-}
-
-interface RazorpayResponse {
-  razorpay_payment_id: string;
-  razorpay_order_id: string;
-  razorpay_signature: string;
-}
+import type { RazorpayOptions, RazorpayResponse } from '@/types/payment';
 
 interface PaymentButtonProps {
   orderId: number;
@@ -47,7 +13,7 @@ interface PaymentButtonProps {
     email?: string;
     contact?: string;
   };
-  notes?: Record<string, any>;
+  notes?: Record<string, string | number>;
   onSuccess: (response: RazorpayResponse) => void;
   onError: (error: Error) => void;
   buttonText?: string;
@@ -158,7 +124,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
       const options: RazorpayOptions = {
         key: orderData.razorpay_key_id,
         amount: orderData.amount * 100, // Amount in paise
-        currency: orderData.currency,
+        currency: currency || orderData.currency,
         name: 'Amar Box Company',
         description: description,
         order_id: orderData.razorpay_order_id,

@@ -2,6 +2,14 @@
 
 import React, { useState } from 'react';
 import PaymentButton from '@/components/PaymentButton';
+import type { RazorpayResponse } from '@/types/payment';
+
+/**
+ * Example: Complete Order Flow with Payment
+ * 
+ * This page demonstrates how to integrate the payment system
+ * with your box calculation and order creation flow.
+ */
 
 export default function PaymentExamplePage() {
   const [paymentStatus, setPaymentStatus] = useState<string>('');
@@ -16,7 +24,7 @@ export default function PaymentExamplePage() {
     contact: '9876543210',
   };
 
-  const handlePaymentSuccess = (response: any) => {
+  const handlePaymentSuccess = (response: RazorpayResponse) => {
     console.log('Payment successful:', response);
     setPaymentStatus(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
     setError('');
